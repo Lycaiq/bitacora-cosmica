@@ -19,7 +19,7 @@ const stream = {
 const requestLogger = morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev', {
   stream,
   // Omite requests de healthcheck para no contaminar los logs con ruido
-  skip: (req) => req.url === '/health',
+  skip: req => req.url === '/health',
 });
 
 module.exports = requestLogger;

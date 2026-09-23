@@ -96,9 +96,7 @@ describe('Headers de seguridad (Helmet)', () => {
 // ============================================================
 describe('Compresión gzip', () => {
   it('debe comprimir respuestas cuando el cliente acepta gzip', async () => {
-    const res = await request(app)
-      .get('/api/health')
-      .set('Accept-Encoding', 'gzip, deflate');
+    const res = await request(app).get('/api/health').set('Accept-Encoding', 'gzip, deflate');
 
     // Si la respuesta es pequeña, compression puede no comprimir — chequeamos el header
     // En lugar de requerir gzip, verificamos que el servidor responde correctamente
