@@ -1,0 +1,108 @@
+name: 🔐 Security Audit — Bitácora Cósmica
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Auditoría automática cada lunes a las 9:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  security-audit:
+    name: 🛡️ Auditoría de Seguridad
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🌌 Checkout del cosmos
+        uses: actions/checkout@v4
+
+      - name: 🔧 Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Instalar dependencias
+        run: npm ci
+
+      - name: 🔍 Auditoría de vulnerabilidades npm
+        run: npm audit --audit-level=high
+        continue-on-error: false
+
+      - name: 📊 Reporte de auditoría (siempre, aunque falle)
+        if: always()
+        run: npm audit --json > audit-report.json || true
+
+      - name: 📤 Subir reporte de auditoría
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report
+          path: audit-report.json
+          retention-days: 30
+
+  dependency-review:
+    name: 🔎 Revisión de Dependencias (PRs)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: 🌌 Checkout del cosmos
+        uses: actions/checkout@v4
+
+      - name: 🔍 Revisar dependencias nuevas/modificadas
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          deny-licenses: GPL-3.0, AGPL-3.0
+
+  lint-and-format:
+    name: 🧹 Lint y Formato
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🌌 Checkout del cosmos
+        uses: actions/checkout@v4
+
+      - name: 🔧 Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Instalar dependencias
+        run: npm ci
+
+      - name: 🧹 Ejecutar ESLint
+        run: npm run lint
+
+      - name: 💅 Verificar formato con Prettier
+        run: npx prettier --check "**/*.{js,json,css,html,md}"
+
+  tests:
+    name: 🧪 Tests de Integración
+    runs-on: ubuntu-latest
+    needs: [security-audit]
+
+    steps:
+      - name: 🌌 Checkout del cosmos
+        uses: actions/checkout@v4
+
+      - name: 🔧 Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Instalar dependencias
+        run: npm ci
+
+      - name: 🧪 Ejecutar tests
+        run: npm test
+
+      - name: 📊 Reporte de cobertura
+        run: npm run test:coverage
+        continue-on-error: true

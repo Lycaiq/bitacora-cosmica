@@ -4,6 +4,11 @@
   "description": "Un diario personal íntimo con temática cósmica. La luna como lugar de encuentro.",
   "main": "src/server.js",
   "type": "commonjs",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "packageManager": "npm@10.9.2",
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
@@ -13,7 +18,11 @@
     "test": "jest --runInBand",
     "test:integration": "jest tests/integration --runInBand",
     "test:stress": "jest tests/stress --runInBand --forceExit",
-    "test:coverage": "jest --coverage --runInBand"
+    "test:coverage": "jest --coverage --runInBand",
+    "audit": "npm audit",
+    "audit:fix": "npm audit fix",
+    "security": "npm audit --audit-level=high",
+    "prepare": "husky"
   },
   "keywords": [
     "cosmos",
@@ -38,7 +47,9 @@
     "@eslint/js": "^9.10.0",
     "autocannon": "^7.15.0",
     "eslint": "^9.10.0",
+    "husky": "^9.1.6",
     "jest": "^29.7.0",
+    "lint-staged": "^15.2.10",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
     "supertest": "^7.0.0"

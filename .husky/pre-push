@@ -1,0 +1,26 @@
+# ═══════════════════════════════════════════════════════════
+# .husky/pre-push — Hook de seguridad antes de cada push
+# Bitácora Cósmica · La luna como lugar de encuentro
+# ═══════════════════════════════════════════════════════════
+
+echo "🚀 Bitácora Cósmica — preparando el lanzamiento al repositorio remoto..."
+
+# Ejecutar auditoría de seguridad
+echo "🔍 Auditando dependencias en busca de vulnerabilidades..."
+npm audit --audit-level=high
+
+if [ $? -ne 0 ]; then
+  echo "🛑 Se detectaron vulnerabilidades críticas. Ejecuta 'npm audit fix' antes de hacer push."
+  exit 1
+fi
+
+# Ejecutar los tests
+echo "🧪 Ejecutando tests antes del lanzamiento..."
+npm test
+
+if [ $? -ne 0 ]; then
+  echo "💥 Los tests fallaron. No puedes lanzar código roto al cosmos."
+  exit 1
+fi
+
+echo "🌌 Lanzamiento autorizado. Tus cambios viajan al repositorio remoto."

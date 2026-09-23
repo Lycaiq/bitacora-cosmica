@@ -1,0 +1,17 @@
+# ═══════════════════════════════════════════════════════════
+# .husky/pre-commit — Hook de seguridad antes de cada commit
+# Bitácora Cósmica · La luna como lugar de encuentro
+# ═══════════════════════════════════════════════════════════
+
+echo "🌙 Bitácora Cósmica — verificando el cosmos antes de hacer historia..."
+
+# Ejecutar lint-staged (lint + format en archivos staged)
+npx lint-staged
+
+# Si lint-staged falla, abortar el commit
+if [ $? -ne 0 ]; then
+  echo "❌ El cosmos rechaza este commit. Corrige los errores antes de continuar."
+  exit 1
+fi
+
+echo "✨ Todo en orden. El universo acepta tus cambios."

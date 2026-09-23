@@ -1,0 +1,20 @@
+# ═══════════════════════════════════════════════════════════
+# .pnpmrc — Configuración de seguridad para pnpm
+# Bitácora Cósmica · La luna como lugar de encuentro
+# ═══════════════════════════════════════════════════════════
+
+# Auditoría al instalar
+audit=true
+
+# Solo fallar en vulnerabilidades altas o críticas
+audit-level=high
+
+# Verificar integridad del store
+verify-store-integrity=true
+
+# Registro por defecto (explícito)
+registry=https://registry.npmjs.org/
+
+# Tiempo de espera para solicitudes de red (ms)
+fetch-timeout=30000
+fetch-retries=3
