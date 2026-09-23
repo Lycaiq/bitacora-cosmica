@@ -135,7 +135,7 @@ const createApp = () => {
     if (req.path.startsWith('/api')) {
       return res.status(404).json({ success: false, message: 'Ruta no encontrada' });
     }
-    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+    return res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
   });
 
   // ============================================================
