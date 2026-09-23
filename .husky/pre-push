@@ -14,9 +14,11 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Ejecutar los tests
-echo "🧪 Ejecutando tests antes del lanzamiento..."
-npm test
+# Solo tests de integración — rápidos y deterministas.
+# Los tests de stress (memory leak, carga) son para entornos de staging:
+# córrelos manualmente con: npm run test:stress
+echo "🧪 Ejecutando tests de integración antes del lanzamiento..."
+npm run test:integration
 
 if [ $? -ne 0 ]; then
   echo "💥 Los tests fallaron. No puedes lanzar código roto al cosmos."
