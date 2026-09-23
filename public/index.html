@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bitácora Cósmica</title>
+    <meta name="description" content="Un diario personal íntimo. La luna como lugar de encuentro." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Canvas principal donde Three.js renderiza la escena cósmica -->
+    <canvas id="cosmos-canvas"></canvas>
+
+    <!-- Overlay de contenido sobre el canvas 3D -->
+    <main class="overlay" id="main-content">
+      <section class="hero" aria-labelledby="hero-title">
+        <h1 class="hero-title" id="hero-title">
+          La Mujer<br />de mis Propósitos.
+        </h1>
+        <blockquote class="hero-quote">
+          <p>
+            "La luna es nuestro lugar de encuentro.<br />
+            Siempre que me pierda en este viaje,<br />
+            sé que solo tengo que mirar hacia arriba."
+          </p>
+        </blockquote>
+        <p class="hero-hint">Arrastra la luna · Encuentra la paz</p>
+      </section>
+    </main>
+
+    <!-- Loader mientras Three.js inicializa la escena -->
+    <div class="loader" id="loader" aria-label="Cargando el cosmos">
+      <div class="loader__ring"></div>
+    </div>
+
+    <!-- Three.js r165 — versión estable, importmap para módulos ES -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <!-- GSAP para animaciones de texto -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+
+    <!-- Módulo principal — se carga como ES Module -->
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

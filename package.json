@@ -1,0 +1,64 @@
+{
+  "name": "bitacora-cosmica",
+  "version": "1.0.0",
+  "description": "Un diario personal íntimo con temática cósmica. La luna como lugar de encuentro.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "format": "prettier --write \"**/*.{js,json,css,html}\"",
+    "test": "jest --runInBand",
+    "test:integration": "jest tests/integration --runInBand",
+    "test:stress": "jest tests/stress --runInBand --forceExit",
+    "test:coverage": "jest --coverage --runInBand"
+  },
+  "keywords": [
+    "cosmos",
+    "three.js",
+    "personal",
+    "diary",
+    "moon"
+  ],
+  "author": "bitacora-cosmica",
+  "license": "MIT",
+  "dependencies": {
+    "compression": "^1.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^8.0.0",
+    "morgan": "^1.10.0",
+    "winston": "^3.14.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "autocannon": "^7.15.0",
+    "eslint": "^9.10.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 30000,
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/server.js"
+    ]
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "js,json",
+    "ignore": [
+      "tests/*",
+      "public/*"
+    ]
+  }
+}

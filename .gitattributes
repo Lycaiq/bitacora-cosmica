@@ -1,0 +1,14 @@
+# Normalización de line endings — todos los archivos de texto usan LF en el repo.
+# Git convierte automáticamente en Windows al hacer checkout (CRLF) y al commit (LF).
+* text=auto eol=lf
+
+# Archivos binarios — no tocar
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
